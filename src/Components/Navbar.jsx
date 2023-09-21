@@ -4,7 +4,7 @@ const Navbar = () => {
   const [isOpen,setIsOpen]=useState(false);
   return (
    
-    <div className="w-full h-fit md:h-[100px] inline-flex flex-row transition-all items-center md:mx-8 justify-between md:px-20  py-5 md:py-2 fixed top-0 z-40 bg-white">
+    <div className="w-full h-fit md:h-[100px] inline-flex flex-row transition-all items-center  md:mx-8 justify-between md:px-20  py-5 md:py-2 fixed top-0 z-40 bg-white">
       <div>
         <img
           className="mt-3 md:h-20 "
