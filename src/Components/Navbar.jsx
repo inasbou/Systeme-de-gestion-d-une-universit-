@@ -4,29 +4,29 @@ const Navbar = () => {
   const [isOpen,setIsOpen]=useState(false);
   return (
    
-    <div className="w-full h-fit md:h-[100px] inline-flex flex-row transition-all items-center  md:mx-8 justify-between md:px-20  py-5 md:py-2 fixed top-0 z-40 bg-white">
+    <div className="flex flex-row justify-between px-10 ">
       <div>
         <img
-          className="mt-3 md:h-20 "
-          src="/icons/LOGO.png"
-          alt=" logo"
+          className="md:h-20 "
+          src="/LOGO.png"
+          alt="logo"
         />
       </div>
-      <div className="hidden md:inline-flex flex-row items-center  gap-x-16">
+      <div className="hidden md:inline-flex flex-row items-center  gap-x-16 justify-center">
         <a
           aria-current="page"
           href="/"
-          className="router-link-active router-link-exact-active  font-medium text-black text-md "
+          className="router-link-active router-link-exact-active  text-gray-500 text-md "
         >
-          A props
+          A propos
         </a>
-        <a className="font-medium text-black text-md" href="#plans">
+        <a className="text-md  text-gray-500" href="#plans">
          Aide
         </a>
         
        
-        <a className="font-medium text-black text-md" href="#support">
-          Contact
+        <a className="  text-gray-500 text-md" href="#support">
+          Contacts
         </a>
       </div>
       
@@ -41,7 +41,7 @@ const Navbar = () => {
         />
         <div className="w-full inline-flex flex-col items-center gap-y-16">
           <img
-            src="/icons/LOGO.png"
+            src="/LOGO.png"
             alt=""
            
             
@@ -62,7 +62,7 @@ const Navbar = () => {
           </a>
           
         </div>
-      </div> :  <img className="md:hidden h-5" src="/icons/menu.svg"  onClick={ ()=>setIsOpen(true)} />}
+      </div> :  <img className="md:hidden h-5" src="/icons/menu.svg"  onClick={ ()=>setIsOpen(true)} alt='' />}
       
     </div>
             
