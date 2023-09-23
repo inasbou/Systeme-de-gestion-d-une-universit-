@@ -1,10 +1,10 @@
 import React, { useState } from 'react';
 import NavBarHome from '../Components/NavBarHome';
 import axios from 'axios';
-import {FaCloudUploadAlt, FaFilePdf, FaFileImage, FaFilePowerpoint, FaFileExcel, FaFileVideo } from 'react-icons/fa';
+import {FaCloudUploadAlt, FaSearch, FaFilePdf, FaFileImage, FaFilePowerpoint, FaFileExcel, FaFileVideo } from 'react-icons/fa';
 import {RiDeleteBin6Fill} from 'react-icons/ri'
-
-
+import {AiFillFileAdd} from 'react-icons/ai'
+import Popup from '../Components/Popup';
 
 const getFileIcon = (fileExtension) => {
   switch (fileExtension) {
@@ -30,14 +30,29 @@ function Ressources() {
   const groupeOptions = ['G1', 'G2', 'G3'];
   const spécialitéOptions = ['Informatique', 'Management'];
 
+  const [isPopupOpen, setPopupOpen] = useState(false);
+
+  const openPopup = () => {
+    setPopupOpen(true);
+  };
+
+  const closePopup = () => {
+    setPopupOpen(false);
+  };
+
 
 
   const filesData = [
-    { id: 1, name: 'document.pdf' },
-    { id: 2, name: 'image.pdf' },
-    { id: 3, name: 'presentation.doc' },
-    { id: 4, name: 'spreadsheet.xls' },
-    { id: 5, name: 'video.doc' },
+    { id: 1, name: 'Cours1.pdf' },
+    { id: 2, name: 'TD5.pdf' },
+    { id: 3, name: 'Cours.doc' },
+    { id: 4, name: 'Planning.xls' },
+    { id: 5, name: 'ARCHI1.doc' },
+    { id: 1, name: 'SujetExamen.pdf' },
+    { id: 2, name: 'ALGO.pdf' },
+    { id: 3, name: 'TD01.doc' },
+    { id: 4, name: 'Notes.xls' },
+    { id: 5, name: 'Compterendu.doc' },
   ];
   
   const [radio , setRadio] = useState(''); 
@@ -99,44 +114,32 @@ function Ressources() {
   const [fichier, setFichier] = useState(filesData);
 
   const handleDelete = (id, fileName) => {
-    const confirmation = window.confirm(`Are you sure you want to delete ${fileName}?`);
+    const confirmation = window.confirm(`Vous etes sur que vous pouvez supprimer ce fichier ? : ${fileName}?`);
     if (confirmation) {
       const updatedFiles = fichier.filter((file) => file.id !== id);
       setFichier(updatedFiles);
     }
   };
+  const [searchQuery, setSearchQuery] = useState('');
+
+  const handleSearch = (query) => {
+    setSearchQuery(query);
+    // Perform search or filtering based on the query here
+  };
 
   return (
     <div>
       <NavBarHome />
-      <div className='flex flex-row gap-10 '>
-      
-        {fichier.map((file, index) => {
-          const fileExtension = file.name.split('.').pop().toLowerCase();
-          const fileIcon = getFileIcon(fileExtension);
-          const fileNameWithoutExtension = file.name.replace(/\.[^/.]+$/, ''); // Remove file extension
-
-          return (
-            <div key={file.id}>
-              <img src={fileIcon} alt={fileExtension} className="h-20 w-20" />
-              <div className='flex flex-row justify-center items-center'>
-             <p className='text-base text-gray-600 text-center'> {fileNameWithoutExtension} </p>
-              <button onClick={() => handleDelete(file.id, file.name)} className="delete-button">
-                <span role="img" aria-label="Delete"><RiDeleteBin6Fill className='text-lg text-red-700 ml-2'/></span>
-              </button>
-            </div>
-            </div>
-          );
-        })}
-       
-      </div>
-
-
-
-      <form className="p-10  flex flex-col justify-center items-center" onSubmit={handleSubmit}>
-      
-      
-        <div className='w-full flex flex-row justify-between py-5 px-52'>
+      <div className='w-full flex flex-row justify-between py-5 px-32'>
+      <div className="flex items-center flex-row gap-2 bg-white border px-4 py-2 pr-8 rounded-xl shadow">
+      <FaSearch className="search-icon" />
+      <input
+        type="text"
+        placeholder='Rechercher ressource ....'
+        onChange={{handleSearch}} className='leading-tight focus:outline-none '
+      />
+    </div>
+    
         <select
           id="Spécialité"
           name="Spécialité"
@@ -215,29 +218,40 @@ function Ressources() {
         Cours
       </label></div>
       </div>
+      <div className='flex justify-end p-5'>
+      <button onClick={openPopup} className='text-blue flex flex-row gap-2 items-center font-semibold '>
+        Ajouter fichier <AiFillFileAdd className=' text-xl'/>
+      </button>
+      </div>
 
-
-        <div className="w-full mb-4  flex flex-col justify-center items-center ">
-          
-          <div className="relative w-1/2 h-44 border-dashed border-2 border-gray-300 rounded-2xl flex flex-col justify-center items-center">
-            <input
-              type="file"
-              onChange={handleFileChange}
-              accept=".pdf"
-              className="absolute top-0 left-0 w-full h-full opacity-0 cursor-pointer"
-            />
-            <div className="text-center ">
-              {file ? (
-                <span className="text-green-500">File selected: {file.name}</span>
-              ) : (
-                <span className="text-gray-300">Clicquer pour séléctionner un fichier <FaCloudUploadAlt className=' text-center h-40 w-40 '/></span>
-              )}
-            </div>
-          </div>
-        </div>
+      {isPopupOpen && (
+        <Popup onClose={closePopup} />
+      )}
+      <div className='flex flex-wrap gap-10 p-10'>
         
-        <button type="submit" className="bg-blue text-white py-2 px-4 rounded hover:bg-blue-600">Confirmer</button>
-      </form>
+        {fichier.map((file, index) => {
+          const fileExtension = file.name.split('.').pop().toLowerCase();
+          const fileIcon = getFileIcon(fileExtension);
+          const fileNameWithoutExtension = file.name.replace(/\.[^/.]+$/, ''); // Remove file extension
+
+          return (
+            <div key={file.id}>
+              <img src={fileIcon} alt={fileExtension} className="h-20 w-20" />
+              <div className='flex flex-row justify-center items-center'>
+             <p className='text-base text-gray-600 text-center'> {fileNameWithoutExtension} </p>
+              <button onClick={() => handleDelete(file.id, file.name)} className="delete-button">
+                <span role="img" aria-label="Delete"><RiDeleteBin6Fill className='text-lg text-red-700 ml-2'/></span>
+              </button>
+            </div>
+            </div>
+          );
+        })}
+       
+      </div>
+
+
+
+    
     </div>
   );
 }

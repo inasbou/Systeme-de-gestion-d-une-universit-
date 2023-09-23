@@ -5,6 +5,7 @@ import axios from "axios";
 import * as Yup from 'yup';
 
 
+
 function FormEtud() {
     const spécialitéOptions = ['Informatique', 'Management'];
     const promoOptions = ['L1', 'L2', 'L3'];
@@ -63,7 +64,7 @@ function FormEtud() {
     
   return (
     <div className='flex justify-center items-center '>
-       <form onSubmit={formik.handleSubmit} className=" w-2/3 mt-8 p-6 bg-white rounded shadow-lg flex flex-col justify-center items-center ">
+       <form onSubmit={formik.handleSubmit} className=" w-2/3 p-6 bg-white rounded shadow-lg flex flex-col justify-center items-center ">
         <h2 className="block text-bluetext font-semibold mb-4 text-center text-lg ">Inscription d'étudiant : </h2>
       <div className="mb-4 w-full">
         <label htmlFor="Civilié" className="block text-gray-700 font-semibold mb-2">Civilité:</label>

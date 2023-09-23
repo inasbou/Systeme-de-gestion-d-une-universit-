@@ -4,21 +4,13 @@ import * as Yup from 'yup';
 
 function FormParent() {
  
-    const spécialitéOptions = ['Informatique', 'Management'];
-    const promoOptions = ['L1', 'L2', 'L3'];
-    const groupeOptions = ['G1', 'G2', 'G3'];
-
+    
 
     const formik = useFormik({
         initialValues: {
           email: '',
           Nom: '',
           Prénom: '',
-          AnnéeScolarité: '',
-          Spécialité: '',
-          Promo: '',
-          Groupe: '',
-          Numéro_inscription: '',
           Numéro_telephone: '',
           DateDeNaissance: '',
         },
@@ -96,96 +88,31 @@ function FormParent() {
 
       
 
-      <div className="mb-4 w-full">
-        <label htmlFor="Scolarité" className="block text-gray-700 font-semibold mb-2">Scolarité:</label>
-        <div className='flex flex-row justify-between gap-5 mb-2'>
-        
-        <select
-          id="Spécialité"
-          name="Spécialité"
-          className="block  w-full bg-white border px-4 py-2 pr-8 rounded shadow leading-tight focus:outline-none focus:ring "
-          onChange={formik.handleChange}
-          value={formik.values.Spécialité}
-        >
-          <option value="">Spécialité...</option>
-          {spécialitéOptions.map((option) => (
-            <option key={option} value={option}>
-              {option}
-            </option>
-          ))}
-        </select>
+      
 
 
 
-        <input
-          type="text"
-          id="Numéro_inscription"
-          name="Numéro_inscription"
-          placeholder='Matricule...'
-          className="w-full px-3 py-2 border rounded-lg focus:outline-none focus:ring focus:border-blue-300"
-          onChange={formik.handleChange}
-          value={formik.values.Numéro_inscription}
-        />
-        </div> 
-       </div> 
-
-
-
-       <div className='flex flex-row justify-between gap-5 mb-2 w-full'>
+       
+       
      
-
+      <label htmlFor="Coordonées" className="block text-gray-700 font-semibold mb-2">Informations étudiant :</label>
         <input
           type="text"
-          id="AnnéeScolarité"
-          name="AnnéeScolarité"
-          placeholder='Année Scolarité...'
+          id="etudiant"
+          name="etudiant"
+          placeholder='Matricule étudiant ...'
           className="w-full px-3 py-2 border rounded-lg focus:outline-none focus:ring focus:border-blue-300"
           onChange={formik.handleChange}
           value={formik.values.AnnéeScolarité}
         />
       
-
+      
 
 
       
 
       
-        <select
-          id="Promo"
-          name="Promo"
-          className="block w-full bg-white border px-4 py-2 pr-8 rounded shadow leading-tight focus:outline-none focus:ring "
-          onChange={formik.handleChange}
-          value={formik.values.Promo}
-        >
-          <option value="">Promo...</option>
-          {promoOptions.map((option) => (
-            <option key={option} value={option}>
-              {option}
-            </option>
-          ))}
-        </select>
-      
-   </div>
-      
-
-   
-       
-        <select
-          id="Groupe"
-          name="Groupe"
-          className="block  w-full bg-white border px-4 py-2 pr-8 rounded shadow leading-tight focus:outline-none focus:ring "
-          onChange={formik.handleChange}
-          value={formik.values.Groupe}
-        >
-          <option value="">Groupe...</option>
-          {groupeOptions.map((option) => (
-            <option key={option} value={option}>
-              {option}
-            </option>
-          ))}
-        </select>
-      
-
+        
       
        
      

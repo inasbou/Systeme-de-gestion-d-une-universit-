@@ -6,6 +6,7 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Communication from "./Pages/Communication";
 import Notes from "./Pages/Notes";
 import Ressources from "./Pages/Ressources";
+import Mesressources from "./Pages/Mesressources";
 function App() {
   return (
     <div>
@@ -17,6 +18,7 @@ function App() {
           <Route exact path="/communication" element={<Communication />} />
           <Route exact path="/notes" element={<Notes />} />
           <Route exact path="/ressources" element={<Ressources />} />
+          <Route exact path="/mesressources" element={<Mesressources />} />
         </Routes>
       </BrowserRouter>
     </div>
