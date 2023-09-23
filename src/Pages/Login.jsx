@@ -1,6 +1,9 @@
 import React from "react";
 import LoginC from "../Components/LoginC";
 import Navbar from "../Components/Navbar";
+import { Link , useNavigate } from "react-router-dom";
+import axios from "axios";
+
 
 const Login = () => {
   return (

@@ -1,49 +1,84 @@
-import { React, useState } from "react";
+import { React,  useState, useEffect, useRef   } from "react";
+import { CgLogOut } from "react-icons/cg"; 
+import { FaBell } from 'react-icons/fa'; 
 
 const NavBarHome = () => {
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const menuRef = useRef(null);
+
+  const toggleMenu = () => {
+    setIsMenuOpen(!isMenuOpen);
+  };
+  const closeMenu = () => {
+    setIsMenuOpen(false);
+  };
+
+
+
+
+
+
+  useEffect(() => {
+    const handleWindowClick = (event) => {
+      if (menuRef.current && !menuRef.current.contains(event.target)) {
+        closeMenu();
+      }
+    };
+
+    if (isMenuOpen) {
+      window.addEventListener('click', handleWindowClick);
+    } else {
+      window.removeEventListener('click', handleWindowClick);
+    }
+
+    // Cleanup the event listener when the component unmounts
+    return () => {
+      window.removeEventListener('click', handleWindowClick);
+    };
+  }, [isMenuOpen]);
+
+
+
   const [isOpen, setIsOpen] = useState(false);
-  const role = "prof";
+  const storedData = JSON.parse(localStorage.getItem('role'));
+  console.log()
+  const role = 'Enseignant'; 
   return (
-    <div>
-      <div className="w-full h-fit md:h-[100px] inline-flex flex-row transition-all items-center justify-between md:justify-evenly px-6 md:px-0 py-5 md:py-2 fixed top-0 z-40 bg-white">
-      <div>
-        <img
-          className="mt-3 md:h-20 "
-          src="/icons/LOGO.png"
-          alt=" logo"
+    <div className=''>
+      <img
+          className=" md:h-20 fixed mt-1 ml-1  "
+          src="/LOGO.png"
+          alt="logo"
         />
-      </div>
-        <div className="hidden md:inline-flex flex-row items-center  gap-x-16">
-          <a
-            aria-current="page"
-            href="/"
-            className="router-link-active router-link-exact-active  font-medium text-black text-md "
-          >
-            Home
-          </a>
-          {role == "student" ? (
+     
+      <div className="flex flex-row justify-center items-center gap-8 p-5">
+      
+        <div className="hidden md:inline-flex flex-row items-center bg-bluenav rounded-3xl py-1 px-5  ">
+          
+
+          {role === "Etudiant" ? (
             <div className=" flex gap-x-16">
-              <a className="router-link-active router-link-exact-active  font-medium text-black text-md ">
+              <a className="font-medium text-black text-md cursor-pointer " href='"'>
+                Mes Notes
+              </a>
+              <a className="font-medium text-black text-md cursor-pointer " href='"'>
+               Mes Ressources
+              </a>
+            </div>
+          ) : role === "Enseignant" ? (
+            <div className=" flex gap-x-16">
+              <a className="font-medium text-black text-md cursor-pointer" href="/ressources">
+                Ressources
+              </a>
+              <a className="font-medium text-black text-md cursor-pointer" href="/notes">
                 Notes
               </a>
-              <a className="router-link-active router-link-exact-active  font-medium text-black text-md ">
-                Ressources
-              </a>{" "}
-            </div>
-          ) : role == "prof" ? (
-            <div className=" flex gap-x-16">
-              <a className="font-medium text-black text-md" href="#plans">
-                Ressources
-              </a>
-              <a className="font-medium text-black text-md" href="#support">
-                Groupes
-              </a>{" "}
-              <a className="font-medium text-black text-md" href="#support">
+              <a className="font-medium text-black text-md cursor-pointer" href="/Emploi">
                 Emploi
               </a>
             </div>
           ) : (
-            (role = "parent" ? (
+            (role === "Parent" ? (
                 <div className=" flex gap-x-16">
                 <a className="font-medium text-black text-md" href="#plans">
                   Student tracking
@@ -53,22 +88,42 @@ const NavBarHome = () => {
                 </a>{" "}
               </div>
             ) : (
-                <div className=" flex gap-x-16">
-                <a className="font-medium text-black text-md" href="#plans">
+                <div className=" flex gap-6">
+                <a className=" text-black text-md" href="/inscription">
                   Registration
                 </a>
-                <a className="font-medium text-black text-md" href="#support">
+                <a className=" text-black text-md" href="#support">
                   Organisation
                 </a>
-                <a className="font-medium text-black text-md" href="#support">
+                <a className=" text-black text-md" href="#support">
                   Time Table
                 </a>
-                <a className="font-medium text-black text-md" href="#support">
+                <a className=" text-black text-md" href="/communication">
                   Communication
                 </a>{" "}
               </div>
             ))
           )}
+
+        <img src="/user.png" class='h-8 w-8 rounded-full ml-8' alt='user' onClick={toggleMenu}/>
+        {isMenuOpen && (
+              <ul className="absolute mt-52 right-96 w-40 bg-bluenav border rounded-xl shadow-lg z-10">
+                <li className="hover:bg-blue hover:text-white px-4 py-2 cursor-pointer">
+                  Parametre
+                </li>
+                <li className="hover:bg-blue hover:text-white px-4 py-2 cursor-pointer">
+                  Modifier profile
+                </li>
+                <li className="hover:bg-blue hover:text-white px-4 py-2 cursor-pointer">
+                  Aide
+                </li>
+                <li className="hover:bg-blue hover:text-white px-4 py-2 cursor-pointer">
+                  Deconnecter
+                </li>
+              </ul>
+            )}
+        
+      
         </div>
 
         {isOpen ? (
@@ -85,7 +140,7 @@ const NavBarHome = () => {
                 alt=""
                 className="w-1/2 my-3"
               />
-              {role=="student" ? (
+              {role==="student" ? (
               <div className="flex flex-col gap-y-16">
               <a
                 aria-current="page"
@@ -134,10 +189,10 @@ const NavBarHome = () => {
               <div className="flex flex-col gap-y-16">
               <a
                 aria-current="page"
-                href="/"
+                href="/inscription"
                 className="router-link-active router-link-exact-active font-semibold text-white text-xl"
               >
-               Registration
+               Inscriptions
               </a>
               <a className="font-semibold text-white text-xl" >
                Organisation
@@ -157,7 +212,13 @@ const NavBarHome = () => {
             onClick={() => setIsOpen(true)}
           />
         )}
+        <img
+          className=" md:h-20 fixed mt-1 right-0.5 "
+          src="/logoo.png"
+          alt="logoo"
+        />
       </div>
+      
     </div>
   );
 };
