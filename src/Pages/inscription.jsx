@@ -17,7 +17,7 @@ function Inscription() {
 
     <div>
         <NavBarHome/>
-      <div className="py-10 flex flex-row justify-between px-72 text-md ">
+      <div className=" flex flex-row justify-between px-72 text-md ">
         <button className={`group focus:outline-none  px-10 text-bold  py-2 ${
             activeButton === 1
               ? ' border-b-2 border-blue text-blue'

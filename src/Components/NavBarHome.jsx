@@ -42,7 +42,7 @@ const NavBarHome = () => {
   const [isOpen, setIsOpen] = useState(false);
   const storedData = JSON.parse(localStorage.getItem('role'));
   console.log()
-  const role = 'Enseignant'; 
+  const role = storedData;  
   return (
     <div className=''>
       <img
@@ -58,10 +58,10 @@ const NavBarHome = () => {
 
           {role === "Etudiant" ? (
             <div className=" flex gap-x-16">
-              <a className="font-medium text-black text-md cursor-pointer " href='"'>
+              <a className="font-medium text-black text-md cursor-pointer " href='/mesnotes'>
                 Mes Notes
               </a>
-              <a className="font-medium text-black text-md cursor-pointer " href='"'>
+              <a className="font-medium text-black text-md cursor-pointer " href='/mesressources'>
                Mes Ressources
               </a>
             </div>
@@ -89,17 +89,17 @@ const NavBarHome = () => {
               </div>
             ) : (
                 <div className=" flex gap-6">
-                <a className=" text-black text-md" href="/inscription">
-                  Registration
+                <a className=" font-medium text-black text-md cursor-pointer" href="/inscription">
+                  Inscriptions
                 </a>
-                <a className=" text-black text-md" href="#support">
-                  Organisation
+                <a className=" font-medium text-black text-md cursor-pointer" href="#support">
+                  Organisations
                 </a>
-                <a className=" text-black text-md" href="#support">
-                  Time Table
+                <a className=" font-medium text-black text-md cursor-pointer" href="#support">
+                  Emplois
                 </a>
-                <a className=" text-black text-md" href="/communication">
-                  Communication
+                <a className=" font-medium text-black text-md cursor-pointer" href="/communication">
+                  Communications
                 </a>{" "}
               </div>
             ))
