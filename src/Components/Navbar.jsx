@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import Notification from "./Notification";
 
 const Navbar = () => {
   const [isOpen,setIsOpen]=useState(false);
@@ -28,6 +29,7 @@ const Navbar = () => {
         <a className="  text-gray-500 text-md" href="#support">
           Contacts
         </a>
+        
       </div>
       
      { isOpen ?  

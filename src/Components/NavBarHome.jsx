@@ -1,6 +1,7 @@
 import { React,  useState, useEffect, useRef   } from "react";
 import { CgLogOut } from "react-icons/cg"; 
 import { FaBell } from 'react-icons/fa'; 
+import Notification from "./Notification";
 
 const NavBarHome = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -12,10 +13,6 @@ const NavBarHome = () => {
   const closeMenu = () => {
     setIsMenuOpen(false);
   };
-
-
-
-
 
 
   useEffect(() => {
@@ -42,7 +39,7 @@ const NavBarHome = () => {
   const [isOpen, setIsOpen] = useState(false);
   const storedData = JSON.parse(localStorage.getItem('role'));
   console.log()
-  const role = storedData;  
+  const role = 'hgh'; 
   return (
     <div className=''>
       <img
@@ -58,12 +55,13 @@ const NavBarHome = () => {
 
           {role === "Etudiant" ? (
             <div className=" flex gap-x-16">
-              <a className="font-medium text-black text-md cursor-pointer " href='/mesnotes'>
+              <a className="font-medium text-black text-md cursor-pointer " href='/marks'>
                 Mes Notes
               </a>
-              <a className="font-medium text-black text-md cursor-pointer " href='/mesressources'>
+              <a className="font-medium text-black text-md cursor-pointer " href='/ressources'>
                Mes Ressources
               </a>
+              <Notification className='w-8 h-8'/>
             </div>
           ) : role === "Enseignant" ? (
             <div className=" flex gap-x-16">
@@ -73,7 +71,7 @@ const NavBarHome = () => {
               <a className="font-medium text-black text-md cursor-pointer" href="/notes">
                 Notes
               </a>
-              <a className="font-medium text-black text-md cursor-pointer" href="/Emploi">
+              <a className="font-medium text-black text-md cursor-pointer" href="/emploi">
                 Emploi
               </a>
             </div>
@@ -85,21 +83,22 @@ const NavBarHome = () => {
                 </a>
                 <a className="font-medium text-black text-md" href="#support">
                   chat room
-                </a>{" "}
+                </a>
+                <Notification/>
               </div>
             ) : (
                 <div className=" flex gap-6">
-                <a className=" font-medium text-black text-md cursor-pointer" href="/inscription">
-                  Inscriptions
+                <a className=" text-black text-md" href="/inscription">
+                  Registration
                 </a>
-                <a className=" font-medium text-black text-md cursor-pointer" href="#support">
-                  Organisations
+                <a className=" text-black text-md" href="#support">
+                  Organisation
                 </a>
-                <a className=" font-medium text-black text-md cursor-pointer" href="#support">
-                  Emplois
+                <a className=" text-black text-md" href="#support">
+                  Time Table
                 </a>
-                <a className=" font-medium text-black text-md cursor-pointer" href="/communication">
-                  Communications
+                <a className=" text-black text-md" href="/communication">
+                  Communication
                 </a>{" "}
               </div>
             ))

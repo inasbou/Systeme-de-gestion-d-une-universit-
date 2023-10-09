@@ -1,14 +1,11 @@
 import React, { useState } from 'react';
 import { FaEye, FaEyeSlash } from 'react-icons/fa';
 import { RiUserLine } from 'react-icons/ri'; 
-import { Link , useNavigate } from "react-router-dom";
-import axios from "axios";
-
 
 function LoginC() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const navigate=useNavigate(); 
+
   const handleEmailChange = (e) => {
     setEmail(e.target.value);
   };
@@ -17,59 +14,17 @@ function LoginC() {
     setPassword(e.target.value);
   };
 
-  const handleSubmit = async (e) => {
+  const handleSubmit = (e) => {
     e.preventDefault();
-    
+    // Here you can perform form submission logic, e.g., sending the data to a server.
     console.log('Email:', email);
     console.log('Password:', password);
-    try{
-
-      const res = await axios.post('http://192.168.196.77:8080/api/auth/signin ',{ email , password} ) ; 
-      console.log(res.data);
-      const user=res.data ; 
-
-      
-      navigate('/home'); 
-
-      
-
-      if(user.message){
-        alert("email or password Invalid");
-      }else{
-        if(user.accesToken===null){
-          
-          alert("email or password Invalid");
-        }else{
-          localStorage.setItem('role',JSON.stringify(user.role));
-          localStorage.setItem('user',JSON.stringify(user));
-          navigate('/home'); }
-          if(user.role==="Etudiant"){
-            const resEtudiant = await axios.post('http://192.168.196.77:8080/api/Etudiant/getStudent',{"userId":user.id} ) ; 
-            localStorage.setItem('Etudiant',JSON.stringify(resEtudiant.data));
-            console.log(resEtudiant.data);
-          }
-          if(user.role==="Enseignant"){
-            const resEnseignant = await axios.post('http://192.168.196.77:8080/api/Enseignant/getProf',{"userId":user.id} ) ; 
-            localStorage.setItem('Enseignant',JSON.stringify(resEnseignant.data));
-            console.log(resEnseignant.data);
-          }
-      }
-
-      
-      
-
-    } catch(error) 
-    {console.log('error')}
-    
   };
   const [showPassword, setShowPassword] = useState(false);
-
-
 
   const togglePasswordVisibility = () => {
     setShowPassword(!showPassword);
   };
-  
 
   return (
     <div className='flex flex-col p-16' >
