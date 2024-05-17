@@ -1,4 +1,10 @@
 ![CHEESE!](public/HackWave_WebWonders(1).png)
+# In our applicatin we have 4 types of users : 
+### Administrator
+### Teacher
+### Student
+### Parent
+
 ![CHEESE!](public/HackWave_WebWonders.png)
 ![CHEESE!](public/HackWave_WebWonders(2).png)
 ![CHEESE!](public/HackWave_WebWonders(3).png)
